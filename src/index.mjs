@@ -122,7 +122,7 @@ app.delete("/students/:id", (req, res) => {
 
   mockStudents.splice(studentIndex, 1);
 
-  res.status(200).json({message: "Student deleted"});
+  res.status(204).json({message: "Student deleted"});
 });
 
 app.listen(PORT, () => { 
