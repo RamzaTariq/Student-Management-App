@@ -100,6 +100,22 @@ app.patch("/students/:id", (req, res) => {
   res.status(200).json(student);
 });
 
+/* DELETE STUDENT */
+
+app.delete("/students/:id", (req, res) => {
+  const id = Number(req.params.id);
+
+  const studentIndex = mockStudents.findIndex(s => s.id === id);
+
+  if (studentIndex === -1) {
+    return res.status(404).json({ error: "Student not found" });
+  }
+
+  mockStudents.splice(studentIndex, 1);
+
+  res.status(200).json({message: "Student deleted"});
+});
+
 app.listen(PORT, () => { 
     console.log(`Server running on port ${PORT}`); 
 }); 
