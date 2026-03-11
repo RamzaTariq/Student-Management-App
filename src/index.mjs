@@ -57,7 +57,30 @@ app.post("/students", (req, res) => {
     
     res.status(201).json(newStudent); 
 }); 
-    
+  
+/* UPDATE STUDENT */
+app.put("/students/:id", (req, res) => {
+  const id = Number(req.params.id);
+
+  const { username, course, module } = req.body || {};
+
+  const student = mockStudents.find(s => s.id === id);
+
+  if (!student) {
+    return res.status(404).json({ error: "Student not found" });
+  }
+
+  if (!username || !course || !module) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  student.username = username;
+  student.course = course;
+  student.module = module;
+
+  res.status(200).json(student);
+});
+
 app.listen(PORT, () => { 
     console.log(`Server running on port ${PORT}`); 
 }); 
