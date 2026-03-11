@@ -1,9 +1,9 @@
 import express from "express"; 
 
 const app = express(); 
-const PORT = 3000; app.use(express.json()); 
+const PORT = 3000; 
 
-let students = []; 
+app.use(express.json()); 
 
 const mockStudents = [ 
     { id: 1, username: "jburns", course: "information technology", module: "A001" }, 
@@ -38,11 +38,6 @@ app.get("/students/:id", (req, res) => {
     res.status(200).json(student); 
 }); 
 
-
-app.listen(PORT, () => { 
-    console.log(`Server running on port ${PORT}`); 
-}); 
-
 /* CREATE STUDENT */ 
 app.post("/students", (req, res) => { 
     const { username, course, module } = req.body || {}; 
@@ -63,21 +58,6 @@ app.post("/students", (req, res) => {
     res.status(201).json(newStudent); 
 }); 
     
-/* PUT */ 
-app.put("/students/:id", (req, res) => { 
-    const id = parseInt(req.params.id); 
-
-    const { username, course, module } = req.body; 
-
-    const student = mockStudents.find(s => s.id === id); 
-    
-    if (!student) { 
-        return res.status(404).json({ message: "Student not found" }); 
-    } 
-    
-    student.username = username; 
-    student.course = course; 
-    student.module = module; 
-    
-    res.json(student); 
-});
+app.listen(PORT, () => { 
+    console.log(`Server running on port ${PORT}`); 
+}); 
