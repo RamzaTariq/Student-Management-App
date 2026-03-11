@@ -1,0 +1,20 @@
+{
+  "name": "student-management-app",
+  "version": "1.0.0",
+  "description": "Student Management API built with Express",
+  "main": "src/index.mjs",
+  "type": "module",
+  "author": "Ramza Tariq",
+  "license": "ISC",
+  "scripts": {
+    "start": "node src/index.mjs",
+    "dev": "nodemon src/index.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
