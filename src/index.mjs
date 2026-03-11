@@ -81,6 +81,25 @@ app.put("/students/:id", (req, res) => {
   res.status(200).json(student);
 });
 
+/* PARTIAL UPDATE */
+app.patch("/students/:id", (req, res) => {
+  const id = Number(req.params.id);
+
+  const student = mockStudents.find(s => s.id === id);
+
+  if (!student) {
+    return res.status(404).json({ error: "Student not found" });
+  }
+
+  const { username, course, module } = req.body;
+
+  if (username) student.username = username;
+  if (course) student.course = course;
+  if (module) student.module = module;
+
+  res.status(200).json(student);
+});
+
 app.listen(PORT, () => { 
     console.log(`Server running on port ${PORT}`); 
 }); 
