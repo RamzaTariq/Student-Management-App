@@ -31,8 +31,32 @@ app.get("/", (req, res) => {
 
 /* GET ALL STUDENTS */ 
 app.get("/students", (req, res) => {
-     res.status(200).json(mockStudents); 
-}); 
+
+  const { filter, value } = req.query;
+
+  if (!filter && !value) {
+    return res.status(200).json(mockStudents);
+  }
+
+  if (filter && !value) {
+    return res.status(400).json({
+      error: "Value is required when filter is provided"
+    });
+  }
+
+  if (!filter && value) {
+    return res.status(400).json({
+      error: "Filter is required when value is provided"
+    });
+  }
+
+  const filteredStudents = mockStudents.filter(student =>
+    student[filter].toLowerCase().includes(value.toLowerCase())
+  );
+
+  res.status(200).json(filteredStudents);
+
+});
 
 /* GET STUDENT BY ID */ 
 app.get("/students/:id", (req, res) => {
